@@ -38,7 +38,7 @@
 ## 📂 项目结构# android_timeout
 
 Timeout/├── app/
-│ └── src/main/│
+│ └── src/main/
 ├── java/com/example/timeout/ # 核心代码│
 ├── res/ # 布局、颜色、图标资源│
 └── AndroidManifest.xml # 权限与组件声明
