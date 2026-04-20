@@ -39,7 +39,7 @@
 
 - Timeout/app/
 -       src/main/
--           java/com/example/timeout/ # 核心代码│
+-           java/com/example/timeout/ # 核心代码
 -           res/ # 布局、颜色、图标资源
 -       AndroidManifest.xml # 权限与组件声明
 - gradle/ # Gradle 配置
