@@ -37,16 +37,15 @@
 
 ## 📂 项目结构# android_timeout
 
-Timeout/├── app/
-│ └── src/main/
-├── java/com/example/timeout/ # 核心代码│
-├── res/ # 布局、颜色、图标资源│
-└── AndroidManifest.xml # 权限与组件声明
-├── gradle/ # Gradle 配置
-├── build.gradle.kts # 项目构建配置
-├── settings.gradle.kts
-└── .gitignore # Git 忽略配置
-
+Timeout/app/
+      src/main/
+          java/com/example/timeout/ # 核心代码│
+          res/ # 布局、颜色、图标资源
+      AndroidManifest.xml # 权限与组件声明
+gradle/ # Gradle 配置
+build.gradle.kts # 项目构建配置
+settings.gradle.kts
+.gitignore # Git 忽略配置
 
 ---
 
@@ -58,4 +57,4 @@ Timeout/├── app/
 ---
 
 ## 📄 License
-MIT License © 2025
+MIT License © 2026
