@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#73A8D9"
+    android:padding="30dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="到点了"
+        android:textSize="50sp"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="40dp"/>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textSize="100sp"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="60dp"/>
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="220dp"
+        android:layout_height="60dp"
+        android:text="开始倒计时"
+        android:textSize="20sp"
+        android:textColor="#73A8D9"
+        android:backgroundTint="#ffffff"/>
+
+</LinearLayout>
