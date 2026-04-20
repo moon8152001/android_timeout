@@ -27,6 +27,13 @@
 
 ---
 
+## 📸 项目截图
+
+| 图标界面 | 主界面 | 设置倒计时 | 倒计时进行中 |
+|:---:|:---:|:---:|:---:|
+| ![图标页面](screenshots/index.jpg) | ![主界面](screenshots/main.jpg) | ![设置弹窗](screenshots/input.jpg) | ![倒计时中](screenshots/running.jpg) |
+---
+
 ## 🛠️ 开发环境
 - Android Studio Hedgehog | 2023.1.1+
 - Gradle 8.2+
