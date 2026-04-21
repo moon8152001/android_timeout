@@ -1,36 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#71A6D2"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#73A8D9"
-    android:padding="30dp">
+    android:padding="24dp">
 
+    <!-- 标题 -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="到点了"
-        android:textSize="50sp"
-        android:textColor="#ffffff"
-        android:layout_marginBottom="40dp"/>
+        android:textSize="72sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginTop="40dp"/>
 
+    <!-- 倒计时显示 -->
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="00:00"
-        android:textSize="100sp"
-        android:textColor="#ffffff"
+        android:textSize="120sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="60dp"
         android:layout_marginBottom="60dp"/>
 
+    <!-- 开始按钮 -->
     <Button
         android:id="@+id/btn_start"
-        android:layout_width="220dp"
-        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="开始倒计时"
         android:textSize="20sp"
-        android:textColor="#73A8D9"
-        android:backgroundTint="#ffffff"/>
+        android:textColor="#71A6D2"
+        android:background="@drawable/btn_rounded"
+        android:padding="16dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="32dp"/>
+
+    <!-- 关于入口：文字形式，不占空间 -->
+    <TextView
+        android:id="@+id/tv_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="关于我们"
+        android:textSize="16sp"
+        android:textColor="#DDFFFFFF"
+        android:clickable="true"
+        android:padding="8dp"/>
 
 </LinearLayout>

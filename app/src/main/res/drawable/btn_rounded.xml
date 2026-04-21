@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="false">
+        <shape android:shape="rectangle">
+            <!-- 背景白色 -->
+            <solid android:color="#FFFFFF"/>
+            <!-- 圆角半径，数值越大越圆 -->
+            <corners android:radius="24dp"/>
+            <!-- 按钮阴影效果，让它更立体 -->
+            <stroke android:width="1dp" android:color="#E0E0E0"/>
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <!-- 按下时稍微变浅，模拟点击反馈 -->
+            <solid android:color="#F0F0F0"/>
+            <corners android:radius="24dp"/>
+        </shape>
+    </item>
+</selector>

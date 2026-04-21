@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- 标题 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="关于 到点了"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- 应用简介 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="应用简介"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="到点了是一款由个人开发者独立制作的极简倒计时锁屏工具，专为帮助中小学生和用户控制手机使用时长、养成自律习惯而设计。\n\n本应用无广告、无后台数据收集，所有功能仅在本地运行，安全可靠。"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:lineSpacingExtra="4dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- 重要设置说明（审核必看） -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="重要设置说明"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#FF6700"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="为保证锁屏功能正常生效，请务必设置：\n\n1. 进入「设置 → 应用 → 应用启动管理」\n2. 找到「到点了」→ 设置为【手动管理】\n3. 开启：自启动、关联启动、后台活动\n4. 允许设备管理员权限"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:background="#FFF8E1"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- 隐私声明 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="隐私声明"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="本应用不收集、不存储、不上传任何用户个人信息，所有逻辑均在本地运行，不会向任何服务器传输数据。"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- 版本信息 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="版本信息"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="当前版本：v1.1.0\n更新日期：2026年04月21日\n开发者：布鲁克斯\n反馈邮箱：moon8152001@126.com"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- 底部感谢语 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="感谢您的使用与支持！"
+            android:textSize="14sp"
+            android:textColor="#888888"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:paddingBottom="30dp"/>
+
+    </LinearLayout>
+</ScrollView>

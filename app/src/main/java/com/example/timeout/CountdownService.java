@@ -13,8 +13,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.Handler;
 import android.widget.Toast;
-
 import androidx.core.app.NotificationCompat;
+import android.content.SharedPreferences;
 
 public class CountdownService extends Service {
     private int totalTime;
@@ -34,7 +34,6 @@ public class CountdownService extends Service {
         devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
         componentName = new ComponentName(this, AdminReceiver.class);
 
-        // 前台服务通知保活（划掉也不容易死）
         createChannel();
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("倒计时锁屏中")
@@ -71,12 +70,21 @@ public class CountdownService extends Service {
             public void run() {
                 if (totalTime > 0) {
                     totalTime--;
-                    // 发广播更新界面
                     Intent intent = new Intent("COUNT_DOWN_TIME");
                     intent.putExtra("remaining", totalTime);
                     sendBroadcast(intent);
                     handler.postDelayed(this, 1000);
                 } else {
+
+                    // ==============================
+                    // ✅ 倒计时结束 = 强制重置状态
+                    // ==============================
+                    SharedPreferences sp = getSharedPreferences("countdown_state", MODE_PRIVATE);
+                    sp.edit()
+                            .putBoolean("is_running", false)
+                            .putInt("last_remaining", 0)
+                            .apply();
+
                     tryLock();
                     stopForeground(true);
                     stopSelf();
@@ -85,7 +93,6 @@ public class CountdownService extends Service {
         };
         handler.post(runnable);
 
-        // 被杀自动重启
         return START_STICKY;
     }
 
