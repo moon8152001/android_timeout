@@ -2,14 +2,17 @@ package com.example.timeout;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -21,11 +24,14 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
     private TextView tvTime;
     private Button btnStart;
+    private TextView btnStop;
     private ComponentName componentName;
     private DevicePolicyManager devicePolicyManager;
 
     private SharedPreferences sp;
     private boolean isCountdownRunning = false;
+
+    private static final int REQUEST_CODE_CONFIRM_CREDENTIALS = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,22 +40,22 @@ public class MainActivity extends Activity {
 
         tvTime = findViewById(R.id.tv_time);
         btnStart = findViewById(R.id.btn_start);
+        btnStop = findViewById(R.id.btn_stop);
         componentName = new ComponentName(this, AdminReceiver.class);
         devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         sp = getSharedPreferences("countdown_state", MODE_PRIVATE);
 
-        // 按钮点击事件恢复正常
         btnStart.setOnClickListener(v -> showInputDialog());
 
-        // 关于
+        btnStop.setOnClickListener(v -> showAuthToStop());
+
         TextView tvAbout = findViewById(R.id.tv_about);
         tvAbout.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AboutActivity.class);
             startActivity(intent);
         });
 
-        // 首次提示
         SharedPreferences spHint = getSharedPreferences("app_prefs", MODE_PRIVATE);
         if (!spHint.getBoolean("has_shown_hint", false)) {
             new AlertDialog.Builder(this)
@@ -60,6 +66,45 @@ public class MainActivity extends Activity {
                     .setCancelable(false)
                     .show();
         }
+    }
+
+    private void showAuthToStop() {
+        KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Intent intent = km.createConfirmDeviceCredentialIntent("验证锁屏密码", "输入密码即可中止倒计时");
+            if (intent != null) {
+                startActivityForResult(intent, REQUEST_CODE_CONFIRM_CREDENTIALS);
+            } else {
+                Toast.makeText(this, "您未设置锁屏密码，无法中止", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "系统版本过低，无法使用此功能", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_CONFIRM_CREDENTIALS) {
+            if (resultCode == RESULT_OK) {
+                stopCountdownNow();
+                Toast.makeText(this, "已中止倒计时", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "验证失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void stopCountdownNow() {
+        stopService(new Intent(this, CountdownService.class));
+
+        sp.edit()
+                .putBoolean("is_running", false)
+                .putInt("last_remaining", 0)
+                .apply();
+
+        checkServiceStatusAndUpdateUI();
     }
 
     @Override
@@ -98,6 +143,7 @@ public class MainActivity extends Activity {
             isCountdownRunning = true;
             btnStart.setText("倒计时进行中");
             btnStart.setEnabled(false);
+            btnStop.setVisibility(View.VISIBLE);
             tvTime.setText(String.format("%02d:%02d", lastRemain / 60, lastRemain % 60));
         } else {
             isCountdownRunning = false;
@@ -108,6 +154,7 @@ public class MainActivity extends Activity {
 
             btnStart.setText("开始倒计时");
             btnStart.setEnabled(true);
+            btnStop.setVisibility(View.GONE);
             tvTime.setText("00:00");
         }
     }
@@ -133,7 +180,7 @@ public class MainActivity extends Activity {
                             Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
                             intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName);
                             intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "必须开启锁屏权限");
-                            startActivity(intent);
+                                    startActivity(intent);
                             return;
                         }
 
@@ -145,6 +192,7 @@ public class MainActivity extends Activity {
 
                         btnStart.setText("倒计时进行中");
                         btnStart.setEnabled(false);
+                        btnStop.setVisibility(View.VISIBLE);
 
                         stopService(new Intent(this, CountdownService.class));
                         Intent service = new Intent(this, CountdownService.class);

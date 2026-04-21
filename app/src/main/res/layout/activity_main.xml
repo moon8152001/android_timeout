@@ -42,7 +42,20 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="32dp"/>
 
-    <!-- 关于入口：文字形式，不占空间 -->
+    <!-- 中止倒计时（文字样式，红色，和关于一样） -->
+    <TextView
+        android:id="@+id/btn_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="中止倒计时"
+        android:textColor="#FF3B30"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="8dp"/>
+
+    <!-- 关于我们 -->
     <TextView
         android:id="@+id/tv_about"
         android:layout_width="wrap_content"
